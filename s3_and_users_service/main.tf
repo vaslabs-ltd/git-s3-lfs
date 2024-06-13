@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "git_lfs_bucket" {
 }
 
 locals {
-  bucket_arn = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket.arn : var.bucket_arn
+  bucket_arn = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
 }
 
 resource "aws_iam_policy" "access_to_the_bucket" {
@@ -47,14 +47,14 @@ resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
 
 # start the user creation
 resource "aws_iam_user" "user" {
-  for_each = toset(var.aws_username)
-  name = each.key
+  for_each = var.user
+  name = each.value.iam
 }
 
 resource "aws_iam_user_login_profile" "user" {
+  for_each = var.user
   user    = aws_iam_user.user[each.key].name
-  for_each = toset(var.keybase_username)
-  pgp_key = "keybase:${each.key}"
+  pgp_key = "keybase:${each.value.keybase}"
   password_reset_required = true
   lifecycle {
     ignore_changes = [password_reset_required]
@@ -62,9 +62,9 @@ resource "aws_iam_user_login_profile" "user" {
 }
 
 resource "aws_iam_user_policy" "user_policy" {
-  for_each = toset(var.aws_username)
-  name = "${each.key}-policy"
+  for_each = var.user
   user = aws_iam_user.user[each.key].name
+  name = "${each.value.iam}-policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -82,7 +82,7 @@ resource "aws_iam_group" "developers" {
 }
 
 resource "aws_iam_user_group_membership" "user_membership" {
-  for_each = toset(var.aws_username)
+  for_each = var.user
   user = aws_iam_user.user[each.key].name
   groups = [aws_iam_group.developers.name]
 }
