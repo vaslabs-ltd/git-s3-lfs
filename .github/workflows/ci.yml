@@ -76,7 +76,7 @@ jobs:
         working-directory: ${{ env.TF_ROOT }}
 
       - name: Terraform Plan
-        run: terraform plan -var-file=vars/gitlab.tfvars
+        run: terraform plan -var-file=vars/git.tfvars
         working-directory: ${{ env.TF_ROOT }}
 
       # - name: Terraform Apply
