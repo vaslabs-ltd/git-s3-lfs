@@ -7,7 +7,7 @@ generate_docs_in_readme() {
     cd -
 }
 
-for module in $(ls -d lambda_*); do
+for module in $(ls -d s3_*); do
     terraform fmt
     generate_docs_in_readme $module
 done
