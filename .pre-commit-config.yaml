@@ -1,0 +1,14 @@
+repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.72.2
+  hooks:
+    - id: terraform_fmt
+      args:
+      - recursive
+- repo: local
+  hooks:
+  - id: terraform_docs
+    name: generate-docs
+    entry: ./generate_docs.sh
+    language: script
+    pass_filenames: false

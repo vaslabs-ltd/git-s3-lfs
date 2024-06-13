@@ -1,0 +1,5 @@
+formatter: markdown
+
+recursive:
+  enabled: true
+  path: modules
