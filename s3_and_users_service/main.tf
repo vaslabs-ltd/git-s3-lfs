@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "git_lfs_bucket" {
-  count = var.bucket_arn == null ? 1 : 0
+  count  = var.bucket_arn == null ? 1 : 0
   bucket = var.s3_bucket_name
-  
+
   tags = {
     Name        = var.s3_bucket_name
     Environment = var.environment
@@ -16,7 +16,7 @@ locals {
 resource "aws_iam_policy" "access_to_the_bucket" {
   name        = "${var.project_name}-LFS-Access"
   description = "Permissions to access S3 for git lfs for project ${var.project_name}"
-  policy      = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -42,19 +42,19 @@ resource "aws_iam_group" "group" {
 
 resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
   policy_arn = aws_iam_policy.access_to_the_bucket.arn
-  group = aws_iam_group.group.name
+  group      = aws_iam_group.group.name
 }
 
 # start the user creation
 resource "aws_iam_user" "user" {
   for_each = var.user
-  name = each.value.iam
+  name     = each.value.iam
 }
 
 resource "aws_iam_user_login_profile" "user" {
-  for_each = var.user
-  user    = aws_iam_user.user[each.key].name
-  pgp_key = "keybase:${each.value.keybase}"
+  for_each                = var.user
+  user                    = aws_iam_user.user[each.key].name
+  pgp_key                 = "keybase:${each.value.keybase}"
   password_reset_required = true
   lifecycle {
     ignore_changes = [password_reset_required]
@@ -63,14 +63,14 @@ resource "aws_iam_user_login_profile" "user" {
 
 resource "aws_iam_user_policy" "user_policy" {
   for_each = var.user
-  user = aws_iam_user.user[each.key].name
-  name = "${each.value.iam}-policy"
+  user     = aws_iam_user.user[each.key].name
+  name     = "${each.value.iam}-policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = local.user_policy_doc_actions
+        Effect   = "Allow"
+        Action   = local.user_policy_doc_actions
         Resource = "${aws_iam_user.user[each.key].arn}"
       }
     ]
@@ -83,8 +83,8 @@ resource "aws_iam_group" "developers" {
 
 resource "aws_iam_user_group_membership" "user_membership" {
   for_each = var.user
-  user = aws_iam_user.user[each.key].name
-  groups = [aws_iam_group.developers.name]
+  user     = aws_iam_user.user[each.key].name
+  groups   = [aws_iam_group.developers.name]
 }
 
 
