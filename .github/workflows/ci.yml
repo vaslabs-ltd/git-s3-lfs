@@ -8,7 +8,7 @@ on:
   pull_request:
 
 env:
-  TF_ROOT: ${{ github.workspace }}/examples
+  TF_ROOT: ${{ github.workspace }}/s3_and_user_service
   TF_STATE_NAME: git-s3-lfs
 
 jobs:
