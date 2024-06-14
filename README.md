@@ -20,7 +20,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_account_password_policy.strict](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) | resource |
-| [aws_iam_group.developers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group.group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_policy.access_to_the_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
@@ -43,7 +42,7 @@ No modules.
 | <a name="input_iam_user_password_require_symbols"></a> [iam\_user\_password\_require\_symbols](#input\_iam\_user\_password\_require\_symbols) | The aws account password requires symbols. | `bool` | `true` | no |
 | <a name="input_iam_user_password_require_uppercase_characters"></a> [iam\_user\_password\_require\_uppercase\_characters](#input\_iam\_user\_password\_require\_uppercase\_characters) | The aws account password requires uppercase characters. | `bool` | `true` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The name of project. | `string` | n/a | yes |
-| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The name of the s3 bucket. Required if bucket arn is not provided | `string` | `null` | no |
+| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The name of the s3 bucket. Name must match the bucket\_arn if you want to use your own exsisting bucket. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags that will be added to the resources. | `map(string)` | n/a | yes |
 | <a name="input_user"></a> [user](#input\_user) | The users that will be created. Need to pass the aws account name and the keybase username. Check the /examples | `map(map(string))` | n/a | yes |
 

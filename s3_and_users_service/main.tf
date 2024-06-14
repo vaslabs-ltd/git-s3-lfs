@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "git_lfs_bucket" {
 
 locals {
   bucket_arn  = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
-  bucket_name = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].bucket : null
+  bucket_name = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].bucket : var.s3_bucket_name
 }
 
 resource "aws_iam_policy" "access_to_the_bucket" {
@@ -40,7 +40,7 @@ resource "aws_iam_policy" "access_to_the_bucket" {
 }
 
 resource "aws_iam_group" "group" {
-  name = "${var.project_name}-group"
+  name = "${locals.bucket_name}-group"
 }
 
 resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
@@ -81,14 +81,10 @@ resource "aws_iam_user_policy" "user_policy" {
   })
 }
 
-resource "aws_iam_group" "developers" {
-  name = "${var.project_name}-developers"
-}
-
 resource "aws_iam_user_group_membership" "user_membership" {
   for_each = var.user
   user     = aws_iam_user.user[each.key].name
-  groups   = [aws_iam_group.developers.name]
+  groups   = [aws_iam_group.group.name]
 }
 
 

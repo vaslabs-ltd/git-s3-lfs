@@ -2,6 +2,7 @@ module "exsiting-s3_bucket" {
   source       = "../s3_and_users_service"
   environment  = "exsisting-dev"
   project_name = "exsisting-bucket-project"
+  s3_bucket_name = "exsitings3bucket"
   bucket_arn   = "arn:aws:s3:::exsitings3bucket"
   user = {
     "irodotos" : {

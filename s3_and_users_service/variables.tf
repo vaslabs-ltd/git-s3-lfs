@@ -1,7 +1,6 @@
 variable "s3_bucket_name" {
   type        = string
-  description = "The name of the s3 bucket. Required if bucket arn is not provided"
-  default     = null
+  description = "The name of the s3 bucket. Name must match the bucket_arn if you want to use your own exsisting bucket."
 }
 
 variable "bucket_arn" {
