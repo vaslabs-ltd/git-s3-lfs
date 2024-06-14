@@ -14,4 +14,8 @@ module "example_s3_with_users_bucket" {
       "keybase" : "vasilis7"
     }
   }
+  tags = {
+    key1 = "value1",
+    key2 = "value2"
+  }
 }

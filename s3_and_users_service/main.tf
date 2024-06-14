@@ -1,13 +1,13 @@
 resource "aws_s3_bucket" "git_lfs_bucket" {
-  count    = var.bucket_arn == null ? 1 : 0
-  bucket   = var.s3_bucket_name
+  count  = var.bucket_arn == null ? 1 : 0
+  bucket = var.s3_bucket_name
   tags = merge(
     var.tags,
     {
       Name        = var.s3_bucket_name
       Environment = var.environment
       Project     = var.project_name
-    })
+  })
 }
 
 locals {
