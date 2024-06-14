@@ -3,7 +3,6 @@ module "s3_bucket" {
   s3_bucket_name = "my-s3-bucket"
   environment    = "dev"
   project_name   = "my-project"
-  bucket_arn     = null
   user = {
     "irodotos" : {
       "iam" : "irodotos.gitlab"
@@ -13,5 +12,9 @@ module "s3_bucket" {
       "iam" : "vasilis.gitlab"
       "keybase" : "vasilis7"
     }
+  }
+  tags = {
+    key1 = "value1",
+    key2 = "value2"
   }
 }

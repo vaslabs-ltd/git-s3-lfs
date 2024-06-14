@@ -1,11 +1,12 @@
 resource "aws_s3_bucket" "git_lfs_bucket" {
-  count  = var.bucket_arn == null ? 1 : 0
-  bucket = var.s3_bucket_name
-
+  count    = var.bucket_arn == null ? 1 : 0
+  bucket   = var.s3_bucket_name
+  for_each = var.tags
   tags = {
     Name        = var.s3_bucket_name
     Environment = var.environment
     Project     = var.project_name
+    each.key    = each.value
   }
 }
 
@@ -34,6 +35,7 @@ resource "aws_iam_policy" "access_to_the_bucket" {
       }
     ]
   })
+  tags = var.tags
 }
 
 resource "aws_iam_group" "group" {
@@ -49,6 +51,7 @@ resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
 resource "aws_iam_user" "user" {
   for_each = var.user
   name     = each.value.iam
+  tags     = var.tags
 }
 
 resource "aws_iam_user_login_profile" "user" {

@@ -1,11 +1,13 @@
 variable "s3_bucket_name" {
   type        = string
-  description = "The name of the s3 bucket."
+  description = "The name of the s3 bucket. Required if bucket arn is not provided"
+  default     = null
 }
 
 variable "bucket_arn" {
   type        = string
-  description = "The arn of the bucket. Only if you already have a bucket."
+  description = "The arn of the bucket. Required only if you want to use your own exsisting bucket."
+  default     = null
 }
 
 variable "environment" {
@@ -58,3 +60,6 @@ variable "user" {
   type = map(map(string))
 }
 
+variable "tags" {
+  type = map(string)
+}

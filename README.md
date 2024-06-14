@@ -33,7 +33,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_users_to_change_password"></a> [allow\_users\_to\_change\_password](#input\_allow\_users\_to\_change\_password) | Allow users to change the password . | `bool` | `true` | no |
-| <a name="input_bucket_arn"></a> [bucket\_arn](#input\_bucket\_arn) | The arn of the bucket. Only if you already have a bucket. | `string` | n/a | yes |
+| <a name="input_bucket_arn"></a> [bucket\_arn](#input\_bucket\_arn) | The arn of the bucket. Required only if you want to use your own exsisting bucket. | `string` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The name of the environment. | `string` | n/a | yes |
 | <a name="input_minimum_password_length"></a> [minimum\_password\_length](#input\_minimum\_password\_length) | The minimum lenght of the password. | `number` | `16` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The name of project. | `string` | n/a | yes |
@@ -41,7 +41,8 @@ No modules.
 | <a name="input_require_numbers"></a> [require\_numbers](#input\_require\_numbers) | The password requires numbers. | `bool` | `true` | no |
 | <a name="input_require_symbols"></a> [require\_symbols](#input\_require\_symbols) | The password requires symbols. | `bool` | `true` | no |
 | <a name="input_require_uppercase_characters"></a> [require\_uppercase\_characters](#input\_require\_uppercase\_characters) | The password requires uppercase characters. | `bool` | `true` | no |
-| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The name of the s3 bucket. | `string` | n/a | yes |
+| <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The name of the s3 bucket. Required if bucket arn is not provided | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(string)` | n/a | yes |
 | <a name="input_user"></a> [user](#input\_user) | n/a | `map(map(string))` | n/a | yes |
 
 ## Outputs
