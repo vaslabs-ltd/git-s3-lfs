@@ -40,7 +40,7 @@ resource "aws_iam_policy" "access_to_the_bucket" {
 }
 
 resource "aws_iam_group" "group" {
-  name = "${locals.bucket_name}-group"
+  name = "${local.bucket_name}-group"
 }
 
 resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
