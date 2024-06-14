@@ -11,7 +11,8 @@ resource "aws_s3_bucket" "git_lfs_bucket" {
 }
 
 locals {
-  bucket_arn = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
+  bucket_arn  = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
+  bucket_name = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].bucket : null
 }
 
 resource "aws_iam_policy" "access_to_the_bucket" {
