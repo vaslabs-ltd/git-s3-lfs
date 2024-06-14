@@ -3,7 +3,6 @@ module "example_s3_with_users_bucket" {
   s3_bucket_name = "my-s3-bucket"
   environment    = "dev"
   project_name   = "my-project"
-  bucket_arn     = null
   user = {
     "irodotos" : {
       "iam" : "irodotos.gitlab"
