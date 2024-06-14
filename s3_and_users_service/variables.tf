@@ -57,11 +57,11 @@ variable "allow_users_to_change_password" {
 }
 
 variable "user" {
-  type = map(map(string))
+  type        = map(map(string))
   description = "The users that will be created. Need to pass the aws account name and the keybase username. Check the /examples"
 }
 
 variable "tags" {
-  type = map(string)
+  type        = map(string)
   description = "The tags that will be added to the resources."
 }
