@@ -22,9 +22,10 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
-        run: terraform init |
-             terraform validate |
-             terraform plan
+        run: |
+            terraform init 
+            terraform validate 
+            terraform plan
         working-directory: ${{ env.TF_ROOT }}
 
   test:
