@@ -63,7 +63,7 @@ variable "new_users" {
 variable "exsisting_users" {
   type        = list(string)
   description = "The users that already exists and does now need to create them. Need to pass the arn of the user and the keybase username. Check the /examples"
-  default     = null
+  default     = []
 }
 
 variable "tags" {

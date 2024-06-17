@@ -35,7 +35,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_arn"></a> [bucket\_arn](#input\_bucket\_arn) | The arn of the bucket. Required only if you want to use your own exsisting bucket. | `string` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The name of the environment. | `string` | n/a | yes |
-| <a name="input_exsisting_users"></a> [exsisting\_users](#input\_exsisting\_users) | The users that already exists and does now need to create them. Need to pass the arn of the user and the keybase username. Check the /examples | `list(string)` | `null` | no |
+| <a name="input_exsisting_users"></a> [exsisting\_users](#input\_exsisting\_users) | The users that already exists and does now need to create them. Need to pass the arn of the user and the keybase username. Check the /examples | `list(string)` | `[]` | no |
 | <a name="input_iam_user_can_change_password"></a> [iam\_user\_can\_change\_password](#input\_iam\_user\_can\_change\_password) | Allow users to change the aws account password . | `bool` | `true` | no |
 | <a name="input_iam_user_minimum_password_length"></a> [iam\_user\_minimum\_password\_length](#input\_iam\_user\_minimum\_password\_length) | The minimum lenght of the aws account password. | `number` | `16` | no |
 | <a name="input_iam_user_password_require_lowercase_characters"></a> [iam\_user\_password\_require\_lowercase\_characters](#input\_iam\_user\_password\_require\_lowercase\_characters) | The aws account password requires lowercase characters. | `bool` | `true` | no |
