@@ -7,10 +7,8 @@ generate_docs_in_readme() {
     cd ..
 }
 
-for module in $(ls); do
-    echo $module
-    terraform fmt $module
-done
-
+terraform fmt examples
+terraform fmt s3_and_users_service
+terraform fmt tests
 
 generate_docs_in_readme s3_and_users_service

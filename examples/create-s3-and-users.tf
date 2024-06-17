@@ -3,7 +3,7 @@ module "example_s3_with_users_bucket" {
   s3_bucket_name = "my-s3-bucket"
   environment    = "dev"
   project_name   = "my-project"
-  user = {
+  new_users = {
     "irodotos" : {
       "iam" : "irodotos.gitlab"
       "keybase" : "irodotos7"
@@ -13,6 +13,7 @@ module "example_s3_with_users_bucket" {
       "keybase" : "vasilis7"
     }
   }
+  exsisting_users = tolist(["arn:exsisting-irodotos.gitlab", "arn:exsisting-vasilis.gitlab"])
   tags = {
     key1 = "value1",
     key2 = "value2"

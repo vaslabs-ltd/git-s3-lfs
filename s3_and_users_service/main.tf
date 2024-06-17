@@ -13,6 +13,20 @@ resource "aws_s3_bucket" "git_lfs_bucket" {
 locals {
   bucket_arn  = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
   bucket_name = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].bucket : var.s3_bucket_name
+  exsisting_users_map = {
+    for user_arn in var.exsisting_users :
+    user_arn => { "arn" = user_arn
+      "type"            = "exsisting"
+    }
+  }
+  new_users_map = {
+    for user, details in var.new_users : user => {
+      account_name = details["iam"]
+      keybase_name = details["keybase"]
+      type         = "new"
+    }
+  }
+  all_users = merge(local.new_users_map, local.exsisting_users_map)
 }
 
 resource "aws_iam_policy" "access_to_the_bucket" {
@@ -50,13 +64,13 @@ resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
 
 # start the user creation
 resource "aws_iam_user" "user" {
-  for_each = var.user
+  for_each = var.new_users
   name     = each.value.iam
   tags     = var.tags
 }
 
 resource "aws_iam_user_login_profile" "user" {
-  for_each                = var.user
+  for_each                = var.new_users
   user                    = aws_iam_user.user[each.key].name
   pgp_key                 = "keybase:${each.value.keybase}"
   password_reset_required = true
@@ -66,7 +80,7 @@ resource "aws_iam_user_login_profile" "user" {
 }
 
 resource "aws_iam_user_policy" "user_policy" {
-  for_each = var.user
+  for_each = var.new_users
   user     = aws_iam_user.user[each.key].name
   name     = "${each.value.iam}-policy"
   policy = jsonencode({
@@ -82,9 +96,7 @@ resource "aws_iam_user_policy" "user_policy" {
 }
 
 resource "aws_iam_user_group_membership" "user_membership" {
-  for_each = var.user
-  user     = aws_iam_user.user[each.key].name
+  for_each = local.all_users
+  user     = each.value.type == "exsisting" ? each.value.arn : aws_iam_user.user[each.key].name
   groups   = [aws_iam_group.group.name]
 }
-
-

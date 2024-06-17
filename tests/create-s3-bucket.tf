@@ -3,7 +3,7 @@ module "s3_bucket" {
   s3_bucket_name = "my-s3-bucket"
   environment    = "dev"
   project_name   = "my-project"
-  user = {
+  new_users = {
     "irodotos" : {
       "iam" : "irodotos.gitlab"
       "keybase" : "irodotos7"
