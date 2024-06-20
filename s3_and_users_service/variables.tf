@@ -58,6 +58,7 @@ variable "iam_user_can_change_password" {
 variable "new_users" {
   type        = map(map(string))
   description = "The users that will be created. Need to pass the aws account name and the keybase username. Check the /examples"
+  default     = {}
 }
 
 variable "exsisting_users" {
