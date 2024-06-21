@@ -14,7 +14,7 @@ module "exsiting-s3_bucket" {
       "keybase" : "exsisting-vasilis7"
     }
   }
-  exsisting_users = tolist(["arn:exsisting-irodotos.gitlab", "arn:exsisting-vasilis.gitlab"])
+  exsisting_users = tolist(["exsisting-irodotos.gitlab", "exsisting-vasilis.gitlab"])
   tags = {
     key1 = "value1",
     key2 = "value2"

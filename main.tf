@@ -1,29 +1,20 @@
 resource "aws_s3_bucket" "git_lfs_bucket" {
   count  = var.bucket_arn == null ? 1 : 0
   bucket = var.s3_bucket_name
-  tags = merge(
-    var.tags,
-    {
-      Name        = var.s3_bucket_name
-      Environment = var.environment
-      Project     = var.project_name
-  })
+  tags   = var.tags
 }
 
 locals {
   bucket_arn  = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].arn : var.bucket_arn
   bucket_name = var.bucket_arn == null ? aws_s3_bucket.git_lfs_bucket[0].bucket : var.s3_bucket_name
   exsisting_users_map = {
-    for user_arn in var.exsisting_users :
-    user_arn => { "arn" = user_arn
-      "type"            = "exsisting"
+    for name in var.exsisting_users :
+    name => { "name" = name
     }
   }
   new_users_map = {
     for user, details in var.new_users : user => {
-      account_name = details["iam"]
-      keybase_name = details["keybase"]
-      type         = "new"
+      name = details["iam"]
     }
   }
   all_users = merge(local.new_users_map, local.exsisting_users_map)
@@ -97,6 +88,6 @@ resource "aws_iam_user_policy" "user_policy" {
 
 resource "aws_iam_user_group_membership" "user_membership" {
   for_each = local.all_users
-  user     = each.value.type == "exsisting" ? each.value.arn : aws_iam_user.user[each.key].name
+  user     = each.value.name
   groups   = [aws_iam_group.group.name]
 }

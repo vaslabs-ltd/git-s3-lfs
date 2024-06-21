@@ -63,11 +63,12 @@ variable "new_users" {
 
 variable "exsisting_users" {
   type        = list(string)
-  description = "The users that already exists and does now need to create them. Need to pass the arn of the user and the keybase username. Check the /examples"
+  description = "The users that already exists and does now need to create them. Need to pass the iam name of the user. Check the /examples"
   default     = []
 }
 
 variable "tags" {
   type        = map(string)
   description = "The tags that will be added to the resources."
+  default     = {}
 }
