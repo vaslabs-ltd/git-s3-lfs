@@ -57,6 +57,12 @@ jobs:
           terraform plan -var-file=../vars/git.tfvars
         working-directory: ${{ env.TF_ROOT }}/exsisting-bucket-new-users
       
+      - name: Exsisting Bucket and mix Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/exsisting-bucket-mix-users
+      
       - name: New Bucket and exsisting Users
         run: |
           terraform init

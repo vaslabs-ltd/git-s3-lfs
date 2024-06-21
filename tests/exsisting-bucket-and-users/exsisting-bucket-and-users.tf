@@ -4,5 +4,5 @@ module "exsiting-s3_bucket" {
   project_name    = "exsisting-bucket-and-users-project"
   s3_bucket_name  = "exsitingS3bucketAndUsers"
   bucket_arn      = "arn:aws:s3:::exsitingS3bucketAndUsers"
-  exsisting_users = tolist(["exsisting-bucket-and-users-irodotos", "exsisting-bucket-and-users-vasilis"])
+  exsisting_users = tolist(["exsisting-bucket-exstisting-user-irodotos", "exsisting-bucket-exsisting-user-vasilis"])
 }

@@ -5,13 +5,13 @@ module "s3_bucket" {
   project_name   = "my-project"
   new_users = {
     "irodotos" : {
-      "iam" : "new-bucket-new-users-irodotos"
+      "iam" : "new-bucket-new-user-irodotos"
       "keybase" : "irodotos7"
     },
     "vasilis" : {
-      "iam" : "new-bucket-new-users-vasilis"
+      "iam" : "new-bucket-new-user-vasilis"
       "keybase" : "vasilis7"
     }
   }
-  exsisting_users = tolist(["new-bucket-exstisting-users-irodotos", "new-bucket-exstisting-users-vasilis"])
+  exsisting_users = tolist(["new-bucket-exstisting-user-irodotos", "new-bucket-exstisting-user-vasilis"])
 }
