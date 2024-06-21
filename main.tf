@@ -14,7 +14,7 @@ locals {
   }
   new_users_map = {
     for user, details in var.new_users : user => {
-      name = details["iam"]
+      "name" = details["iam"]
     }
   }
   all_users = merge(local.new_users_map, local.exsisting_users_map)
