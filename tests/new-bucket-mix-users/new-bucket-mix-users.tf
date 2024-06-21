@@ -1,20 +1,17 @@
 module "s3_bucket" {
-  source         = "../"
+  source         = "../.."
   s3_bucket_name = "my-s3-bucket"
   environment    = "dev"
   project_name   = "my-project"
   new_users = {
     "irodotos" : {
-      "iam" : "irodotos.gitlab"
+      "iam" : "new-bucket-new-users-irodotos"
       "keybase" : "irodotos7"
     },
     "vasilis" : {
-      "iam" : "vasilis.gitlab"
+      "iam" : "new-bucket-new-users-vasilis"
       "keybase" : "vasilis7"
     }
   }
-  tags = {
-    key1 = "value1",
-    key2 = "value2"
-  }
+  exsisting_users = tolist(["new-bucket-mix-users-irodotos", "new-bucket-mix-users-vasilis"])
 }

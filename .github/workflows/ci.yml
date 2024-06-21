@@ -45,10 +45,32 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
 
-      - name: Terraform Init
-        run: terraform init
-        working-directory: ${{ env.TF_ROOT }}
+      - name: Exsisting Bucket and Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/exsisting-bucket-and-users
+      
+      - name: Exsisting Bucket and new Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/exsisting-bucket-new-users
+      
+      - name: New Bucket and exsisting Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/new-bucket-exsisting-users
+      
+      - name: New Bucket and new Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/new-bucket-new-users
 
-      - name: Terraform Plan
-        run: terraform plan -var-file=vars/git.tfvars
-        working-directory: ${{ env.TF_ROOT }}
+      - name: New Bucket and mix Users
+        run: |
+          terraform init
+          terraform plan -var-file=../vars/git.tfvars
+        working-directory: ${{ env.TF_ROOT }}/new-bucket-mix-users
