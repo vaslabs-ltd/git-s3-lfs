@@ -13,5 +13,5 @@ module "s3_bucket" {
       "keybase" : "vasilis7"
     }
   }
-  exsisting_users = tolist(["new-bucket-mix-users-irodotos", "new-bucket-mix-users-vasilis"])
+  exsisting_users = tolist(["new-bucket-exstisting-users-irodotos", "new-bucket-exstisting-users-vasilis"])
 }
