@@ -8,13 +8,8 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    dynamodb = var.localstack_endpoint
-    kinesis  = var.localstack_endpoint
-    lambda   = var.localstack_endpoint
-    iam      = var.localstack_endpoint
-    sns      = var.localstack_endpoint
-    ec2      = var.localstack_endpoint
-    s3       = var.localstack_endpoint
+    iam = var.localstack_endpoint
+    s3  = var.localstack_endpoint
   }
 
 }
