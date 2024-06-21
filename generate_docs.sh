@@ -8,7 +8,7 @@ generate_docs_in_readme() {
 }
 
 terraform fmt examples
-terraform fmt s3_and_users_service
+terraform fmt 
 terraform fmt tests
 
-generate_docs_in_readme s3_and_users_service
+generate_docs_in_readme 

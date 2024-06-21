@@ -36,7 +36,6 @@ jobs:
     services:
       localstack:
         image: localstack/localstack:1.4
-        # options: --privileged
         ports:
           - 4566:4566
     steps:
@@ -53,7 +52,3 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var-file=vars/git.tfvars
         working-directory: ${{ env.TF_ROOT }}
-
-      # - name: Terraform Apply
-      #   run: terraform apply --auto-approve
-      #   working-directory: ${{ env.TF_ROOT }}

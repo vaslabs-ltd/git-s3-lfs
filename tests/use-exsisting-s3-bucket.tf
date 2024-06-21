@@ -1,5 +1,5 @@
 module "exsiting-s3_bucket" {
-  source         = "../s3_and_users_service"
+  source         = "../"
   environment    = "exsisting-dev"
   project_name   = "exsisting-bucket-project"
   s3_bucket_name = "exsitings3bucket"
