@@ -3,7 +3,7 @@
 generate_docs_in_readme() {
     module=$1
     cd $module
-    terraform-docs markdown . --output-file ../README.md
+    terraform-docs markdown . --output-file ./README.md
     cd ..
 }
 
