@@ -1,5 +1,5 @@
 resource "aws_iam_account_password_policy" "strict" {
-  count                          = var.new_users == {} ? 0 : 1
+  count                          = length(keys(var.new_users)) == 0 ? 0 : 1
   minimum_password_length        = var.iam_user_minimum_password_length
   require_lowercase_characters   = var.iam_user_password_require_lowercase_characters
   require_numbers                = var.iam_user_password_require_numbers
